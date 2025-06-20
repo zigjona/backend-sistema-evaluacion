@@ -7,7 +7,8 @@ const RespuestaSchema = new mongoose.Schema({
   valor: { type: Number, default: null },
   texto: { type: String, default: null },
   porcentaje: { type: Number, default: null },
-  fecha: { type: Date, default: Date.now }
+  fecha: { type: Date, default: Date.now },
+  responsable: { type: String, default:null }// nombre del usuario que responde
 
 });
 

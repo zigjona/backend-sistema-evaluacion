@@ -87,4 +87,25 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+
+// Obtener todos los indicadores con jerarquía completa para la tabla jerárquica
+router.get('/tablaJerarquica', async (req, res) => {
+  try {
+    const indicadores = await Indicador.find()
+      .populate({
+        path: 'criterio',
+        populate: {
+          path: 'facultad',
+        }
+      }
+      );
+
+    res.json(indicadores);
+  } catch (error) {
+    console.error('Error al obtener tabla jerárquica:', error);
+    res.status(500).json({ message: 'Error al obtener tabla jerárquica', error: error.message });
+  }
+});
+
+
 module.exports = router;

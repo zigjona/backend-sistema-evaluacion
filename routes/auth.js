@@ -20,7 +20,11 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    res.json({ token, rol: usuario.rol, nombre: usuario.nombre });
+    res.json({ 
+      token, 
+      rol: usuario.rol, 
+      nombre: usuario.nombre // estoy almacenando el nombre del usuario o administrador
+     });
   } catch (err) {
     res.status(500).json({ mensaje: 'Error al iniciar sesión', error: err });
   }

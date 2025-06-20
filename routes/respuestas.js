@@ -95,7 +95,8 @@ router.post('/multiples', async (req, res) => {
         valor: typeof r.valor === 'number' ? r.valor : null,
         texto: typeof r.texto === 'string' ? r.texto.trim() : null,
         porcentaje: typeof r.porcentaje === 'number' ? r.porcentaje : null,
-        fecha: new Date()
+        fecha: new Date(),
+        responsable: r.responsable || null,
       }));
 
     if (respuestasFiltradas.length === 0) {
@@ -152,6 +153,18 @@ router.get('/promedios', async (req, res) => {
   } catch (error) {
     console.error("❌ Error en /promedios:", error);
     res.status(500).json({ message: 'Error al calcular promedios', error: error.message });
+  }
+});
+//----------------------------------------000-----------------------------------------------------------
+// Ruta para que el administrador vea todas las respuestas (con populate)
+router.get('/todas', async (req, res) => {
+  try {
+    const respuestas = await Respuesta.find()
+    .populate('pregunta indicador');
+    res.json(respuestas);
+  } catch (error) {
+    console.error('Error al obtener todas las respuestas:', error);
+    res.status(500).json({ mensaje: 'Error al obtener respuestas', error: error.message });
   }
 });
 
