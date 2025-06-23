@@ -159,7 +159,7 @@ router.get('/promedios', async (req, res) => {
 // Ruta para que el administrador vea todas las respuestas (con populate)
 router.get('/todas', async (req, res) => {
   try {
-    const respuestas = await Respuesta.find()
+    const respuestas = await Respuesta.find().sort({ fecha: -1 }) // Ordena por fecha descendente (más recientes primero)
     .populate('pregunta indicador');
     res.json(respuestas);
   } catch (error) {
