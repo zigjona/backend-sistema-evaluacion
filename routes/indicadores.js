@@ -98,7 +98,9 @@ router.get('/tablaJerarquica', async (req, res) => {
           path: 'facultad',
         }
       }
-      );
+      )
+      
+      .populate('preguntas') ;
 
     res.json(indicadores);
   } catch (error) {
